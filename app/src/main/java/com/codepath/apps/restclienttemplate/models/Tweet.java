@@ -12,7 +12,7 @@ public class Tweet {
     // our attributes
     public String body;
     public long uid; // databse ID for tweet
-    // public User user;
+    public User user;
     public String createdAt;
 
     // deserailize the JSON
@@ -22,6 +22,7 @@ public class Tweet {
         tweet.body = jsonObject.getString("text");
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
+        tweet.user =  User.fromJSON(jsonObject.getJSONObject("user"));
         return tweet;
     }
 }
