@@ -47,15 +47,16 @@ public class TimelineActivity extends AppCompatActivity {
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
-                populateTimeline(page*);
+                populateTimeline(page);
             }
         };
 
         rvTweets.setAdapter(tweetAdapter);
-//        populateTimeline();
+       populateTimeline(0);
     }
 
     private void populateTimeline(int page) {
+        Log.d("DEBUG", "page " + page );
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
