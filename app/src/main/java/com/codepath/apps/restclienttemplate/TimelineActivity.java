@@ -55,7 +55,7 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets.addOnScrollListener(scrollListener);
 
 
-//       populateTimeline(1);
+       populateTimeline(1);
     }
 
     private void populateTimeline(int page) {
