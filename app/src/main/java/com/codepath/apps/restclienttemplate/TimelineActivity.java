@@ -42,22 +42,25 @@ public class TimelineActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         rvTweets.setLayoutManager(linearLayoutManager);
+        rvTweets.setAdapter(tweetAdapter);
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
-                populateTimeline(page);
+                populateTimeline(( page +1 )* totalItemsCount);
             }
         };
 
-        rvTweets.setAdapter(tweetAdapter);
-       populateTimeline(0);
+        rvTweets.addOnScrollListener(scrollListener);
+
+
+//       populateTimeline(1);
     }
 
     private void populateTimeline(int page) {
         Log.d("DEBUG", "page " + page );
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
+        client.getHomeTimeline(page, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
 //                Log.d("Debug", response.toString());
