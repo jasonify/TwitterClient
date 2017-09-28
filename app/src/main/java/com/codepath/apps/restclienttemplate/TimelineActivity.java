@@ -27,17 +27,14 @@ public class TimelineActivity extends AppCompatActivity {
     RecyclerView rvTweets;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
         client = TwitterApp.getRestClient();
-
         rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
         tweets = new ArrayList<>();
-
         tweetAdapter = new TweetAdapter(tweets);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
@@ -53,8 +50,6 @@ public class TimelineActivity extends AppCompatActivity {
         };
 
         rvTweets.addOnScrollListener(scrollListener);
-
-
        populateTimeline(1);
     }
 
