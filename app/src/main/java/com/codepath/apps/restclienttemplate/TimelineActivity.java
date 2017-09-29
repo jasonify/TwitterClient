@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.utils.EndlessRecyclerViewScrollListener;
@@ -36,6 +39,8 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
         tweets = new ArrayList<>();
         tweetAdapter = new TweetAdapter(tweets);
+
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         rvTweets.setLayoutManager(linearLayoutManager);
@@ -51,6 +56,43 @@ public class TimelineActivity extends AppCompatActivity {
 
         rvTweets.addOnScrollListener(scrollListener);
        populateTimeline(1);
+        tempSetup();
+    }
+
+    // LAST ID:
+
+
+    EditText etTweet;
+    Button btnSubmit;
+    private void tempSetup() {
+        etTweet = (EditText) findViewById(R.id.etTweet);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String msg = etTweet.getText().toString();
+                Log.d("tweeting",  msg);
+                client.postToTimeline(msg, new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                        super.onSuccess(statusCode, headers, response);
+                        try {
+                            Tweet tweet = Tweet.fromJSON(response);
+                            tweets.add(0, tweet);
+                            tweetAdapter.notifyItemInserted(0);
+                            Log.d("tweeted sccess!", "yes");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("tweeted failed :( :(", ":( :(");
+
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private void populateTimeline(int page) {
