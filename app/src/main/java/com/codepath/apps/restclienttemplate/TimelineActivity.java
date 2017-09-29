@@ -50,7 +50,8 @@ public class TimelineActivity extends AppCompatActivity {
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
-                populateTimeline(( page +1 )* totalItemsCount);
+                Tweet lastTweet = tweets.get(tweets.size() - 1);
+                populateTimeline(lastTweet.uid);
             }
         };
 
@@ -95,9 +96,9 @@ public class TimelineActivity extends AppCompatActivity {
         });
     }
 
-    private void populateTimeline(int page) {
-        Log.d("DEBUG", "page " + page );
-        client.getHomeTimeline(page, new JsonHttpResponseHandler() {
+    private void populateTimeline(long sinceId) {
+        Log.d("DEBUG", "sinceId " + sinceId );
+        client.getHomeTimeline(sinceId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
 //                Log.d("Debug", response.toString());
