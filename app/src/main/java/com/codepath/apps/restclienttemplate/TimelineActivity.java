@@ -84,6 +84,7 @@ public class TimelineActivity extends AppCompatActivity {
                             tweets.add(0, tweet);
                             tweetAdapter.notifyItemInserted(0);
                             Log.d("tweeted sccess!", "yes");
+                            rvTweets.smoothScrollToPosition(0);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
