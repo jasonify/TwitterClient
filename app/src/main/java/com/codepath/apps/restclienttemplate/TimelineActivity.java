@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,9 +43,15 @@ public class TimelineActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.miNew) {
             Log.d("click", "miNew");
+            presentComposeTweet();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void presentComposeTweet() {
+        Intent i = new Intent(TimelineActivity.this, ComposeTweetActivity.class);
+        startActivity(i);
     }
 
     @Override

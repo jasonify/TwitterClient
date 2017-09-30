@@ -7,5 +7,7 @@
     <string name="intent_host">cprest</string>
     <string name="username">\@someone</string>
     <string name="tweetbody">Some stuff said here.</string>
+    <string name="Tweet">tweet_btn</string>
+    <string name="tweet_btn">Tweet</string>
 
 </resources>
