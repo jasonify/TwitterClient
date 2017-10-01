@@ -49,7 +49,6 @@ public class ComposeTweetActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent data = new Intent();
-
                 finish();
             }
         });
@@ -66,15 +65,10 @@ public class ComposeTweetActivity extends AppCompatActivity {
                         try {
                             Tweet tweet = Tweet.fromJSON(response);
                             Intent data = new Intent();
+                            data.putExtra("isSubmit", true);
                             data.putExtra("tweet", tweet);
                             setResult(RESULT_OK, data);
                             finish();
-
-
-//                            tweets.add(0, tweet);
-//                            tweetAdapter.notifyItemInserted(0);
-//                            Log.d("tweeted sccess!", "yes");
-//                            rvTweets.smoothScrollToPosition(0);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

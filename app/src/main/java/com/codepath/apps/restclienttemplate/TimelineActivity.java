@@ -8,9 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.utils.EndlessRecyclerViewScrollListener;
@@ -84,45 +81,32 @@ public class TimelineActivity extends AppCompatActivity {
 
         rvTweets.addOnScrollListener(scrollListener);
        populateTimeline(1);
-        tempSetup();
     }
+
+    // ActivityOne.java, time to handle the result of the sub-activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        // REQUEST_CODE is defined above
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            // Extract name value from result extras
+            Boolean isSubmit = intent.getBooleanExtra("isSubmit", true);
+            if (isSubmit) {
+                Tweet tweet = (Tweet) intent.getSerializableExtra("tweet");
+
+                tweets.add(0, tweet);
+                tweetAdapter.notifyItemInserted(0);
+                Log.d("tweeted sccess!", "yes");
+                rvTweets.smoothScrollToPosition(0);
+
+            }
+
+        }
+    }
+
 
     // LAST ID:
 
 
-    EditText etTweet;
-    Button btnSubmit;
-    private void tempSetup() {
-        etTweet = (EditText) findViewById(R.id.etTweet);
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String msg = etTweet.getText().toString();
-                Log.d("tweeting",  msg);
-                client.postToTimeline(msg, new JsonHttpResponseHandler(){
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                        super.onSuccess(statusCode, headers, response);
-                        try {
-                            Tweet tweet = Tweet.fromJSON(response);
-                            tweets.add(0, tweet);
-                            tweetAdapter.notifyItemInserted(0);
-                            Log.d("tweeted sccess!", "yes");
-                            rvTweets.smoothScrollToPosition(0);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("tweeted failed :( :(", ":( :(");
-
-                        }
-                    }
-                });
-            }
-        });
-    }
 
     private void populateTimeline(long sinceId) {
         Log.d("DEBUG", "sinceId " + sinceId );
