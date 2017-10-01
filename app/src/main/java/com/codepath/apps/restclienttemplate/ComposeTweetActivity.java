@@ -20,7 +20,6 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-import static com.codepath.apps.restclienttemplate.R.id.etTweet;
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 public class ComposeTweetActivity extends AppCompatActivity {
@@ -50,6 +49,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent data = new Intent();
+
                 finish();
             }
         });
@@ -65,6 +65,11 @@ public class ComposeTweetActivity extends AppCompatActivity {
 //                        super.onSuccess(statusCode, headers, response);
                         try {
                             Tweet tweet = Tweet.fromJSON(response);
+                            Intent data = new Intent();
+                            data.putExtra("tweet", tweet);
+                            setResult(RESULT_OK, data);
+                            finish();
+
 
 //                            tweets.add(0, tweet);
 //                            tweetAdapter.notifyItemInserted(0);

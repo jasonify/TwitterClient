@@ -5,6 +5,7 @@ import android.text.format.DateUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -13,7 +14,7 @@ import java.util.Locale;
  * Created by jason on 9/26/17.
  */
 
-public class Tweet {
+public class Tweet implements Serializable {
 
     // our attributes
     public String body;
