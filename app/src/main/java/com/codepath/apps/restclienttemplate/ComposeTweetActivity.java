@@ -37,8 +37,6 @@ public class ComposeTweetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_compose_tweet);
         context = getContext();
 
-
-
         btnCancel = (Button) findViewById(R.id.btnCancel);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         etBody = (EditText) findViewById(R.id.etBody);
@@ -60,7 +58,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
                 try {
                     User user = User.fromJSON(response);
                     Glide.with(context).load(user.profileImageUrl).into(ivProfile);
-
+                    etName.setText(user.name);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
