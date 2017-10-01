@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.codepath.apps.restclienttemplate.R.id.etTweet;
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 public class ComposeTweetActivity extends AppCompatActivity {
@@ -49,6 +51,33 @@ public class ComposeTweetActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent data = new Intent();
                 finish();
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String msg = etBody.getText().toString();
+                Log.d("tweeting",  msg);
+                client.postToTimeline(msg, new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                        super.onSuccess(statusCode, headers, response);
+                        try {
+                            Tweet tweet = Tweet.fromJSON(response);
+
+//                            tweets.add(0, tweet);
+//                            tweetAdapter.notifyItemInserted(0);
+//                            Log.d("tweeted sccess!", "yes");
+//                            rvTweets.smoothScrollToPosition(0);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("tweeted failed :( :(", ":( :(");
+
+                        }
+                    }
+                });
             }
         });
 
