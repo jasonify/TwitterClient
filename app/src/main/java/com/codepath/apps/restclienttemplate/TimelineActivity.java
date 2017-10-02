@@ -40,7 +40,6 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.miNew) {
-            Log.d("click", "miNew");
             presentComposeTweet();
             return true;
         }
@@ -50,8 +49,6 @@ public class TimelineActivity extends AppCompatActivity {
     public void presentComposeTweet() {
         Intent i = new Intent(TimelineActivity.this, ComposeTweetActivity.class);
         startActivityForResult(i, REQUEST_CODE);
-
-//        startActivity(i);
     }
 
     @Override
@@ -63,8 +60,7 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
         tweets = new ArrayList<>();
         tweetAdapter = new TweetAdapter(tweets);
-
-
+        
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         rvTweets.setLayoutManager(linearLayoutManager);
@@ -92,28 +88,19 @@ public class TimelineActivity extends AppCompatActivity {
             Boolean isSubmit = intent.getBooleanExtra("isSubmit", true);
             if (isSubmit) {
                 Tweet tweet = (Tweet) intent.getSerializableExtra("tweet");
-
                 tweets.add(0, tweet);
                 tweetAdapter.notifyItemInserted(0);
-                Log.d("tweeted sccess!", "yes");
                 rvTweets.smoothScrollToPosition(0);
-
             }
-
         }
     }
 
 
     // LAST ID:
-
-
-
     private void populateTimeline(long sinceId) {
-        Log.d("DEBUG", "sinceId " + sinceId );
         client.getHomeTimeline(sinceId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                Log.d("Debug", response.toString());
                 for(int i = 0 ; i < response.length(); i++) {
                     try {
                         Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
