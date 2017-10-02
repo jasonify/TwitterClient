@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -30,7 +31,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
     Button btnSubmit;
     EditText etBody;
     ImageView ivProfile;
-    EditText etName;
+    TextView etName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
         etBody = (EditText) findViewById(R.id.etBody);
         client = TwitterApp.getRestClient();
         ivProfile = (ImageView) findViewById(R.id.ivProfile);
-        etName = (EditText) findViewById(R.id.etName);
+        etName = (TextView) findViewById(R.id.etName);
         etBody.setHint("Write something here");
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +74,6 @@ public class ComposeTweetActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d("tweeted failed :( :(", ":( :(");
-
                         }
                     }
                 });
@@ -91,7 +91,6 @@ public class ComposeTweetActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d("tweeted failed :( :(", ":( :(");
-
                 }
             }
         });

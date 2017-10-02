@@ -60,7 +60,7 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
         tweets = new ArrayList<>();
         tweetAdapter = new TweetAdapter(tweets);
-        
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         rvTweets.setLayoutManager(linearLayoutManager);
@@ -94,7 +94,6 @@ public class TimelineActivity extends AppCompatActivity {
             }
         }
     }
-
 
     // LAST ID:
     private void populateTimeline(long sinceId) {
