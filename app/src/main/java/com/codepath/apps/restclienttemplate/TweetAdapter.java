@@ -38,7 +38,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Tweet tweet = mTweets.get(position);
-        holder.tvUsername.setText(tweet.user.name);
+        holder.tvUsername.setText("@" + tweet.user.screenName);
+        holder.tvName.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
         holder.tvDate.setText(tweet.getPrettyDate());
 
@@ -53,6 +54,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivProfileImage;
         public TextView tvUsername;
+        public TextView tvName;
         public TextView tvBody;
         public TextView tvDate;
 
@@ -60,6 +62,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             super(itemView);
             ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
+            tvName = (TextView) itemView.findViewById(R.id.tvName);
+
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvDate = (TextView) itemView.findViewById(R.id.tvDate);
         }
