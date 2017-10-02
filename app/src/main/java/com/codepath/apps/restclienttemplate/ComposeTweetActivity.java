@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +34,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
     EditText etBody;
     ImageView ivProfile;
     TextView etName;
+    TextView tvCharacterCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
         client = TwitterApp.getRestClient();
         ivProfile = (ImageView) findViewById(R.id.ivProfile);
         etName = (TextView) findViewById(R.id.etName);
+        tvCharacterCount = (TextView) findViewById(R.id.tvCharacterCount);
         etBody.setHint("Write something here");
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +63,6 @@ public class ComposeTweetActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String msg = etBody.getText().toString();
-                Log.d("tweeting",  msg);
                 client.postToTimeline(msg, new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -92,6 +95,26 @@ public class ComposeTweetActivity extends AppCompatActivity {
                     e.printStackTrace();
                     Log.d("tweeted failed :( :(", ":( :(");
                 }
+            }
+        });
+
+
+        etBody.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String msg = etBody.getText().toString();
+                String count = "" + (140 - msg.length());
+                tvCharacterCount.setText(count);
             }
         });
 
