@@ -14,7 +14,7 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text=""
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -62,7 +62,7 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="username"
         app:layout_constraintLeft_toRightOf="@+id/ivProfile"
         app:layout_constraintTop_toBottomOf="@+id/btnCancel" />
 

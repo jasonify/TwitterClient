@@ -44,6 +44,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
         client = TwitterApp.getRestClient();
         ivProfile = (ImageView) findViewById(R.id.ivProfile);
         etName = (EditText) findViewById(R.id.etName);
+        etBody.setHint("Write something here");
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +62,6 @@ public class ComposeTweetActivity extends AppCompatActivity {
                 client.postToTimeline(msg, new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                        super.onSuccess(statusCode, headers, response);
                         try {
                             Tweet tweet = Tweet.fromJSON(response);
                             Intent data = new Intent();
