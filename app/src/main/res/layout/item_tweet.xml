@@ -25,7 +25,6 @@
        android:layout_toRightOf="@+id/ivProfileImage"
         >
 
-
         <TextView
             android:layout_marginLeft="10dp"
             android:gravity="center"

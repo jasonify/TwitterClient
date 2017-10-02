@@ -38,8 +38,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Tweet tweet = mTweets.get(position);
-        holder.tvUsername.setText("@dsafsafdsafafasfasdfasdfdsafsafdasfasfsafasfasdfsadfadsafsafdsafafasfasdfasdfdsafsafdasfasfsafasfasdfsadfa" + tweet.user.screenName);
-        holder.tvName.setText("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" + tweet.user.name);
+        holder.tvUsername.setText("@a" + tweet.user.screenName);
+        holder.tvName.setText("" + tweet.user.name);
+
         holder.tvBody.setText(tweet.body);
         holder.tvDate.setText(tweet.getPrettyDate());
 
