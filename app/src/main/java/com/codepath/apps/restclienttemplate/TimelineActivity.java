@@ -2,17 +2,18 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
+import com.codepath.apps.restclienttemplate.fragments.TweetsPageAdapter;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 public class TimelineActivity extends AppCompatActivity {
 
-    TweetsListFragment fragmentTweetList;
-
+    TweetsPageAdapter pageAdapter;
     private final int REQUEST_CODE = 20;
 
 
@@ -41,7 +42,13 @@ public class TimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-        fragmentTweetList = (TweetsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_timeline);
+        // fragmentTweetList = (TweetsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_timeline);
+        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
+        vpPager.setAdapter(new TweetsPageAdapter(getSupportFragmentManager(), this));
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(vpPager);
+
+
 
     }
 
@@ -57,7 +64,8 @@ public class TimelineActivity extends AppCompatActivity {
 
             if (isSubmit) {
                 Tweet tweet = (Tweet) intent.getSerializableExtra("tweet");
-                fragmentTweetList.addNewTweet(tweet);
+
+               // fragmentTweetList.addNewTweet(tweet);
             }
 
 
