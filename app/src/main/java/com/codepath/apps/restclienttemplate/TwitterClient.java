@@ -51,7 +51,7 @@ public class TwitterClient extends OAuthBaseClient {
 		if (lastId == 1) {
 			params.put("since_id", lastId);
 		} else {
-			params.put("max_id", lastId);
+			params.put("max_id", lastId-1);
 
 		}
 		client.get(apiUrl, params, handler);
@@ -65,7 +65,7 @@ public class TwitterClient extends OAuthBaseClient {
 		if (lastId == 1) {
 			params.put("since_id", lastId);
 		} else {
-			params.put("max_id", lastId);
+			params.put("max_id", lastId-1);
 
 		}
 		client.get(apiUrl, params, handler);
