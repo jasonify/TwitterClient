@@ -32,6 +32,7 @@ public class TweetsPageAdapter extends FragmentPagerAdapter {
         } else if (position == 1) {
             return new MentionsTimelineFragment();
         }
+        return null;
     }
 
     @Override
