@@ -24,8 +24,8 @@ import java.util.ArrayList;
  */
 
 public class TweetsListFragment extends Fragment {
-    private EndlessRecyclerViewScrollListener scrollListener;
-
+    EndlessRecyclerViewScrollListener scrollListener;
+    LinearLayoutManager linearLayoutManager;
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
@@ -36,31 +36,12 @@ public class TweetsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragments_tweets_list, container, false);
-
         rvTweets = (RecyclerView) v.findViewById(R.id.rvTweet);
         tweets = new ArrayList<>();
         tweetAdapter = new TweetAdapter(tweets);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-
+        linearLayoutManager = new LinearLayoutManager(getContext());
         rvTweets.setLayoutManager(linearLayoutManager);
         rvTweets.setAdapter(tweetAdapter);
-
-        /*
-        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                // Triggered only when new data needs to be appended to the list
-                // Add whatever code is needed to append new items to the bottom of the list
-
-                Tweet lastTweet = tweets.get(tweets.size() - 1);
-                populateTimeline(lastTweet.uid);
-            }
-        };
-
-        rvTweets.addOnScrollListener(scrollListener);
-        */
-
 
         return v;
     }
@@ -75,5 +56,11 @@ public class TweetsListFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void addNewTweet(Tweet tweet){
+        tweets.add(0, tweet);
+        tweetAdapter.notifyItemInserted(0);
+        rvTweets.smoothScrollToPosition(0);
     }
 }
