@@ -81,8 +81,7 @@ public class TimelineActivity extends AppCompatActivity {
         client.getHomeTimeline(sinceId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-
+                fragmentTweetList.addItems(response);
             }
 
             @Override
