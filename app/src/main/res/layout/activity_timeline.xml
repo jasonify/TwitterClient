@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.codepath.apps.restclienttemplate.TimelineActivity">
 
-
+<fragment
+    android:id="@+id/fragment_timeline"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    class="com.codepath.apps.restclienttemplate.fragments.TweetsListFragment" />
 
 </RelativeLayout>

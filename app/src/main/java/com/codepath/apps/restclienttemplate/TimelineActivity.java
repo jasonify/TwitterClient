@@ -3,31 +3,23 @@ package com.codepath.apps.restclienttemplate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.codepath.apps.restclienttemplate.models.Tweet;
-import com.codepath.apps.restclienttemplate.utils.EndlessRecyclerViewScrollListener;
+import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
 public class TimelineActivity extends AppCompatActivity {
 
-    private EndlessRecyclerViewScrollListener scrollListener;
+    TweetsListFragment fragmentTweetList;
     private TwitterClient client;
-    TweetAdapter tweetAdapter;
-    ArrayList<Tweet> tweets;
-    RecyclerView rvTweets;
+
     private final int REQUEST_CODE = 20;
 
 
@@ -57,25 +49,9 @@ public class TimelineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timeline);
 
         client = TwitterApp.getRestClient();
-        rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
-        tweets = new ArrayList<>();
-        tweetAdapter = new TweetAdapter(tweets);
+        fragmentTweetList = (TweetsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_timeline);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
-        rvTweets.setLayoutManager(linearLayoutManager);
-        rvTweets.setAdapter(tweetAdapter);
-        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                // Triggered only when new data needs to be appended to the list
-                // Add whatever code is needed to append new items to the bottom of the list
-                Tweet lastTweet = tweets.get(tweets.size() - 1);
-                populateTimeline(lastTweet.uid);
-            }
-        };
-
-        rvTweets.addOnScrollListener(scrollListener);
        populateTimeline(1);
     }
 
@@ -85,13 +61,18 @@ public class TimelineActivity extends AppCompatActivity {
         // REQUEST_CODE is defined above
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             // Extract name value from result extras
+            /*
+
+            // Add single tweet to top of list:
             Boolean isSubmit = intent.getBooleanExtra("isSubmit", true);
+
             if (isSubmit) {
                 Tweet tweet = (Tweet) intent.getSerializableExtra("tweet");
                 tweets.add(0, tweet);
                 tweetAdapter.notifyItemInserted(0);
                 rvTweets.smoothScrollToPosition(0);
             }
+            */
         }
     }
 
@@ -100,15 +81,8 @@ public class TimelineActivity extends AppCompatActivity {
         client.getHomeTimeline(sinceId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                for(int i = 0 ; i < response.length(); i++) {
-                    try {
-                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
-                        tweets.add(tweet);
-                        tweetAdapter.notifyItemInserted(tweets.size() - 1);
-                    } catch(JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
+
+
             }
 
             @Override
