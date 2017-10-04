@@ -29,6 +29,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v  = super.onCreateView(inflater, container, savedInstanceState);
         client = TwitterApp.getRestClient();
 
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
@@ -43,11 +44,11 @@ public class HomeTimelineFragment extends TweetsListFragment {
         };
 
         rvTweets.addOnScrollListener(scrollListener);
-
-
+        
         populateTimeline(1);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return v;
+
     }
 
     private void populateTimeline(long sinceId) {
