@@ -44,11 +44,14 @@ public class TimelineActivity extends AppCompatActivity {
 
         // fragmentTweetList = (TweetsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_timeline);
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
-        vpPager.setAdapter(new TweetsPageAdapter(getSupportFragmentManager(), this));
+        TweetsPageAdapter f = new TweetsPageAdapter(getSupportFragmentManager(), this);
+        // = vpPager.getCurrentItem();
+
+        vpPager.setAdapter(f);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
 
-
+//         tabLayout.getSelectedTabPosition()
 
     }
 
