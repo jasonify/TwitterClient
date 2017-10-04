@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/miNew"
-        android:icon="@drawable/newtweet"
+        android:icon="@drawable/ic_edit_white_24dp"
         app:showAsAction="ifRoom"
         android:title="New">
     </item>
