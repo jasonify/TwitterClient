@@ -23,7 +23,7 @@ import cz.msebera.android.httpclient.Header;
  * Created by jason on 10/4/17.
  */
 
-public class HomeTimelineFragment extends TweetsListFragment {
+public class MentionsTimelineFragment extends TweetsListFragment {
     private TwitterClient client;
 
     @Nullable
@@ -52,7 +52,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
     }
 
     private void populateTimeline(long sinceId) {
-        client.getHomeTimeline(sinceId, new JsonHttpResponseHandler() {
+        client.getMentionsTimeline(sinceId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 addItems(response);
@@ -84,3 +84,4 @@ public class HomeTimelineFragment extends TweetsListFragment {
     }
 
 }
+
