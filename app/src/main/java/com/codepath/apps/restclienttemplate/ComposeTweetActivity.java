@@ -83,7 +83,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
             }
         });
 
-        client.getProfile(new JsonHttpResponseHandler(){
+        client.getUserInfo(null, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
