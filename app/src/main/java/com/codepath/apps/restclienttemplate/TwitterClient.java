@@ -52,8 +52,8 @@ public class TwitterClient extends OAuthBaseClient {
 			params.put("since_id", lastId);
 		} else {
 			params.put("max_id", lastId-1);
-
 		}
+
 		client.get(apiUrl, params, handler);
 	}
 
@@ -78,18 +78,14 @@ public class TwitterClient extends OAuthBaseClient {
 		params.put("count", 25);
 		params.put("screen_name", screenName);
 
-//		if (lastId == 1) {
-//			params.put("since_id", lastId);
-//		} else {
-//			params.put("max_id", lastId-1);
-//
-//		}
+		if (lastId == 1) {
+			params.put("since_id", lastId);
+		} else {
+			params.put("max_id", lastId-1);
+
+		}
 		client.get(apiUrl, params, handler);
 	}
-
-
-
-
 
 
 	public void postToTimeline(String status, AsyncHttpResponseHandler handler){
