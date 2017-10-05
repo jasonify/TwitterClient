@@ -73,15 +73,18 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
                 Tweet tweet = (Tweet) intent.getSerializableExtra("tweet");
 
                 int fragmentPosition = vpPager.getCurrentItem();
+
                 if (fragmentPosition == 0) {
-
                     HomeTimelineFragment home =  (HomeTimelineFragment) pageAdapter.getRegisteredFragment(vpPager.getCurrentItem());
-
                     home.addNewTweet(tweet);
 
+                } else {
+                    if (pageAdapter.getRegisteredFragment(0) != null ) {
+                        HomeTimelineFragment home =  (HomeTimelineFragment) pageAdapter.getRegisteredFragment(0);
+                        home.addNewTweet(tweet);
+                    }
                 }
 
-               // fragmentTweetList.addNewTweet(tweet);
             }
         }
     }
