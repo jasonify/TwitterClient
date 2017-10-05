@@ -3,13 +3,14 @@ package com.codepath.apps.restclienttemplate.fragments;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+
+import com.codepath.apps.restclienttemplate.utils.SmartFragmentStatePagerAdapter;
 
 /**
  * Created by jason on 10/4/17.
  */
 
-public class TweetsPageAdapter extends FragmentPagerAdapter {
+public class TweetsPageAdapter extends SmartFragmentStatePagerAdapter {
 
     private String tabTitles[] = new String[] {"Home", "Mentions"};
     private Context context;

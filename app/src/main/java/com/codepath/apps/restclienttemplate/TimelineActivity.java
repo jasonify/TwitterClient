@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.codepath.apps.restclienttemplate.fragments.HomeTimelineFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsPageAdapter;
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -18,7 +19,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 
     TweetsPageAdapter pageAdapter;
     private final int REQUEST_CODE = 20;
-
+    ViewPager vpPager;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,11 +47,11 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         setContentView(R.layout.activity_timeline);
 
         // fragmentTweetList = (TweetsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_timeline);
-        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
-        TweetsPageAdapter f = new TweetsPageAdapter(getSupportFragmentManager(), this);
+         vpPager = (ViewPager) findViewById(R.id.viewpager);
+         pageAdapter = new TweetsPageAdapter(getSupportFragmentManager(), this);
         // = vpPager.getCurrentItem();
 
-        vpPager.setAdapter(f);
+        vpPager.setAdapter(pageAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
 
@@ -70,6 +71,15 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 
             if (isSubmit) {
                 Tweet tweet = (Tweet) intent.getSerializableExtra("tweet");
+
+                int fragmentPosition = vpPager.getCurrentItem();
+                if (fragmentPosition == 0) {
+
+                    HomeTimelineFragment home =  (HomeTimelineFragment) pageAdapter.getRegisteredFragment(vpPager.getCurrentItem());
+
+                    home.addNewTweet(tweet);
+
+                }
 
                // fragmentTweetList.addNewTweet(tweet);
             }
