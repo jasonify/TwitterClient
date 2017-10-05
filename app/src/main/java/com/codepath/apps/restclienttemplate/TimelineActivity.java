@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.fragments.HomeTimelineFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
@@ -71,9 +70,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 
             if (isSubmit) {
                 Tweet tweet = (Tweet) intent.getSerializableExtra("tweet");
-
                 int fragmentPosition = vpPager.getCurrentItem();
-
                 if (fragmentPosition == 0) {
                     HomeTimelineFragment home =  (HomeTimelineFragment) pageAdapter.getRegisteredFragment(vpPager.getCurrentItem());
                     home.addNewTweet(tweet);
@@ -99,7 +96,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 
     @Override
     public void onTweetSelected(Tweet tweet) {
-         Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
+//         Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, ProfileActivity.class);
         i.putExtra("screen_name", tweet.user.screenName);
         startActivity(i);
