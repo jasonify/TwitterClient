@@ -23,8 +23,17 @@ import cz.msebera.android.httpclient.Header;
  * Created by jason on 10/4/17.
  */
 
-public class HomeTimelineFragment extends TweetsListFragment {
+public class UserTimelineFragment extends TweetsListFragment {
     private TwitterClient client;
+
+    public static UserTimelineFragment newInstance(String screenName) {
+        UserTimelineFragment userTimelineFragment =  new UserTimelineFragment();
+        Bundle args = new Bundle();
+        args.putString("screen_name", screenName);
+        userTimelineFragment.setArguments(args);
+
+        return userTimelineFragment;
+    }
 
     @Nullable
     @Override
@@ -52,7 +61,8 @@ public class HomeTimelineFragment extends TweetsListFragment {
     }
 
     private void populateTimeline(long sinceId) {
-        client.getHomeTimeline(sinceId, new JsonHttpResponseHandler() {
+        String screenName = getArguments().getString("screen_name");
+        client.getUserTimeline(screenName, sinceId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 addItems(response);

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -70,9 +71,13 @@ public class TimelineActivity extends AppCompatActivity {
 
                // fragmentTweetList.addNewTweet(tweet);
             }
-
-
         }
+    }
+
+    public void onProfileView(MenuItem item) {
+        Log.d("debug", "clicked profile view");
+        Intent i = new Intent(this, ProfileActivity.class);
+        startActivity(i);
     }
 
     // LAST ID:
