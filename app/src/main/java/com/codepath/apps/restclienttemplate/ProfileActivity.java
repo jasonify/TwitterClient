@@ -14,17 +14,20 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import cz.msebera.android.httpclient.Header;
 
 public class ProfileActivity extends AppCompatActivity {
 
     TwitterClient client;
-
     TextView name;
     TextView description;
     TextView followers;
     TextView following;
     ImageView image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +56,8 @@ public class ProfileActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle(user.screenName);
                     name.setText(user.name);
                     description.setText(user.description);
-                    followers.setText("Followers " + user.followers);
-                    following.setText("Following " + user.friends);
+                    followers.setText("Followers: " + NumberFormat.getNumberInstance(Locale.US).format( user.followers));
+                    following.setText("Following: " + NumberFormat.getNumberInstance(Locale.US).format(user.friends));
 
                     Glide.with(ProfileActivity.this).load(user.profileImageUrl).into(image);
 
