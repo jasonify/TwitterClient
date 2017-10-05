@@ -13,6 +13,14 @@
         android:layout_alignParentTop="true"
         android:id="@+id/rlUserHeader">
 
+
+        <ImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@android:color/holo_blue_bright" />
     </RelativeLayout>
 
     <FrameLayout
@@ -23,4 +31,22 @@
         android:layout_below="@+id/rlUserHeader">
 
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="73dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvProfileDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvProfileName"
+        android:layout_below="@+id/tvProfileName"
+        android:layout_marginTop="14dp"
+        android:text="TextView" />
 </RelativeLayout>
