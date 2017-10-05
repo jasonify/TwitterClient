@@ -22,6 +22,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     TextView name;
     TextView description;
+    TextView followers;
+    TextView following;
     ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class ProfileActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.tvProfileName);
         description = (TextView) findViewById(R.id.tvProfileDescription);
         image = (ImageView) findViewById(R.id.ivProfilePicture);
+        followers = (TextView) findViewById(R.id.tvFollowers);
+        following = (TextView) findViewById(R.id.tvFollowing);
 
         client = TwitterApp.getRestClient();
         client.getUserInfo(screenName, new JsonHttpResponseHandler(){
@@ -49,6 +53,9 @@ public class ProfileActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle(user.screenName);
                     name.setText(user.name);
                     description.setText(user.description);
+                    followers.setText("Followers " + user.followers);
+                    following.setText("Following " + user.friends);
+
                     Glide.with(ProfileActivity.this).load(user.profileImageUrl).into(image);
 
 
