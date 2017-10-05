@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsPageAdapter;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements TweetsListFragment.TweetSelectedListener{
 
     TweetsPageAdapter pageAdapter;
     private final int REQUEST_CODE = 20;
@@ -77,9 +79,16 @@ public class TimelineActivity extends AppCompatActivity {
     public void onProfileView(MenuItem item) {
         Log.d("debug", "clicked profile view");
         Intent i = new Intent(this, ProfileActivity.class);
+
         startActivity(i);
     }
 
-    // LAST ID:
 
+    @Override
+    public void onTweetSelected(Tweet tweet) {
+         Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("screen_name", tweet.user.screenName);
+        startActivity(i);
+    }
 }

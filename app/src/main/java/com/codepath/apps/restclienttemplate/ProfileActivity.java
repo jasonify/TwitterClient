@@ -30,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
         ft.commit();
 
         client = TwitterApp.getRestClient();
-        client.getProfile(new JsonHttpResponseHandler(){
+        client.getUserInfo(screenName, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 User user = null;
