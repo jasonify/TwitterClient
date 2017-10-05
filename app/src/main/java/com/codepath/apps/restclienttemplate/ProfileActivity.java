@@ -3,8 +3,10 @@ package com.codepath.apps.restclienttemplate;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.fragments.UserTimelineFragment;
 import com.codepath.apps.restclienttemplate.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -20,6 +22,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     TextView name;
     TextView description;
+    ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
         ft.commit();
         name = (TextView) findViewById(R.id.tvProfileName);
         description = (TextView) findViewById(R.id.tvProfileDescription);
+        image = (ImageView) findViewById(R.id.ivProfilePicture);
 
         client = TwitterApp.getRestClient();
         client.getUserInfo(screenName, new JsonHttpResponseHandler(){
@@ -45,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle(user.screenName);
                     name.setText(user.name);
                     description.setText(user.description);
+                    Glide.with(ProfileActivity.this).load(user.profileImageUrl).into(image);
 
 
                 } catch (JSONException e) {
