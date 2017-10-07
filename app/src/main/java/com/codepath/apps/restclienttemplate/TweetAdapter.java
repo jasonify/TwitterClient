@@ -73,6 +73,18 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvDate = (TextView) itemView.findViewById(R.id.tvDate);
 
+            /*
+            // TODO: on profile image click
+            ivProfileImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+
+                    // Log.d("IMG", "CLICKED");
+
+                }
+            });
+            */
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
