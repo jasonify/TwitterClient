@@ -56,8 +56,8 @@ public class ProfileActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle(user.screenName);
                     name.setText(user.name);
                     description.setText(user.description);
-                    followers.setText("Followers: " + NumberFormat.getNumberInstance(Locale.US).format( user.followers));
-                    following.setText("Following: " + NumberFormat.getNumberInstance(Locale.US).format(user.friends));
+                    followers.setText(NumberFormat.getNumberInstance(Locale.US).format( user.followers) + " Followers");
+                    following.setText(NumberFormat.getNumberInstance(Locale.US).format(user.friends) + " Following:");
 
                     Glide.with(ProfileActivity.this).load(user.profileImageUrl).into(image);
 
