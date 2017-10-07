@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
-       android:layout_toRightOf="@+id/ivProfileImage"
+        android:layout_toRightOf="@+id/ivProfileImage"
         >
 
         <TextView
@@ -33,7 +33,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:gravity="left|center"
 
             android:id="@+id/tvUserName"
@@ -51,12 +51,13 @@
          android:layout_below="@+id/Names"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="@string/tweetbody" />
 
     <TextView
         android:id="@+id/tvDate"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/tvBody"
