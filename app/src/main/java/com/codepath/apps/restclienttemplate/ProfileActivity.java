@@ -53,11 +53,11 @@ public class ProfileActivity extends AppCompatActivity {
                 User user = null;
                 try {
                     user = User.fromJSON(response);
-                    getSupportActionBar().setTitle(user.screenName);
+                    getSupportActionBar().setTitle("@" + user.screenName);
                     name.setText(user.name);
                     description.setText(user.description);
                     followers.setText(NumberFormat.getNumberInstance(Locale.US).format( user.followers) + " Followers");
-                    following.setText(NumberFormat.getNumberInstance(Locale.US).format(user.friends) + " Following:");
+                    following.setText(NumberFormat.getNumberInstance(Locale.US).format(user.friends) + " Following");
 
                     Glide.with(ProfileActivity.this).load(user.profileImageUrl).into(image);
 
