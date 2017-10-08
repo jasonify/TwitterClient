@@ -55,15 +55,33 @@
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="@string/tweetbody" />
 
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_marginTop="2dp"
+    <LinearLayout
+        android:layout_alignStart="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvBody"
+        android:layout_marginTop="2dp"
         android:layout_below="@+id/tvBody"
-        android:textColor="#9c9c9c"
-        android:textStyle="italic"
-        android:text="2hrsago" />
+        >
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textColor="#9c9c9c"
+            android:textStyle="italic"
+            android:text="2hrs ago" />
+
+        <TextView
+            android:id="@+id/tvReply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+            android:textColor="#9c9c9c"
+            android:textStyle="bold"
+            android:text="Reply" />
+
+
+    </LinearLayout>
+
 
 </RelativeLayout>
